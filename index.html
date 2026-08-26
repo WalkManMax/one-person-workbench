@@ -18,9 +18,12 @@
 
     <!-- ========== 屏1：考勤登记 ========== -->
     <section class="screen active" id="screen-attendance">
-      <header class="page-header">
-        <h1>考勤登记</h1>
-        <p class="subtitle">2026年8月 · 每日记录与小结</p>
+      <header class="page-header page-header-actions">
+        <div>
+          <h1>考勤登记</h1>
+          <p class="subtitle">每日记录 · 小结 · 反思</p>
+        </div>
+        <button class="header-action" onclick="openDataCenter()" aria-label="数据与同步设置">数据</button>
       </header>
       <div class="content">
 
@@ -29,9 +32,9 @@
 
         <!-- 工具栏 -->
         <div class="toolbar">
-          <button class="btn-primary" onclick="openAttendanceForm()">＋ 添加今日记录</button>
+          <button class="btn-primary" onclick="openAttendanceForm()">＋ 添加记录</button>
           <div class="toolbar-right">
-            <button class="btn-ghost" onclick="exportJSON()" title="导出备份">导出</button>
+            <button class="btn-ghost" onclick="openExportOptions()" title="导出数据">导出</button>
             <label class="btn-ghost" title="导入恢复">导入<input type="file" accept="application/json" onchange="importJSON(event)" hidden></label>
           </div>
         </div>
@@ -41,8 +44,21 @@
 
         <!-- 今日状态快选 -->
         <div class="card">
-          <h3 class="card-title">今日状态</h3>
+          <div class="list-header"><h3 class="card-title">今日状态</h3><span class="list-updated">可随时补充详情</span></div>
           <div class="pill-row" id="attendance-status-pills"></div>
+        </div>
+
+        <!-- 筛选与表格视图 -->
+        <div class="card attendance-control-card">
+          <div class="segmented-control" id="attendance-view-toggle">
+            <button class="segment active" onclick="setAttendanceView('table', this)">表格</button>
+            <button class="segment" onclick="setAttendanceView('calendar', this)">日程本</button>
+          </div>
+          <div class="filter-grid">
+            <select id="attendance-month-filter" onchange="setAttendanceMonth(this.value)"></select>
+            <select id="attendance-status-filter" onchange="setAttendanceFilter(this.value)"></select>
+            <input id="attendance-search" type="search" placeholder="搜索地点、事由、小结…" oninput="setAttendanceSearch(this.value)">
+          </div>
         </div>
 
         <!-- 记录列表（JS 渲染） -->
@@ -198,6 +214,33 @@
       </button>
     </nav>
 
+  </div>
+
+  <!-- ========== 数据中心：本地优先、授权同步 ========== -->
+  <div id="data-center-overlay" class="modal-overlay hidden" onclick="closeDataCenter(event)">
+    <section class="modal-card data-center" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <div><h2>数据与同步</h2><p class="modal-subtitle" id="sync-status-copy">本地加密草稿 · 未连接云端</p></div>
+        <button class="modal-close" onclick="closeDataCenter()">×</button>
+      </div>
+      <div class="security-callout">
+        <strong>你的记录由你控制</strong>
+        <span>未授权前，数据只保存在当前设备；云端同步需明确选择字段和目标。</span>
+      </div>
+      <div class="sync-option">
+        <div><b>飞书同步</b><p>同步到指定飞书多维表格；工作小结和反思可单独选择是否同步。</p></div>
+        <button class="btn-primary" id="feishu-connect-btn" onclick="openFeishuSetup()">连接飞书</button>
+      </div>
+      <div class="sync-option">
+        <div><b>微信登录</b><p>可用于身份识别；不自动同步任何考勤数据。</p></div>
+        <button class="btn-ghost" onclick="showWechatInfo()">了解方式</button>
+      </div>
+      <div class="backup-actions">
+        <button class="btn-ghost" onclick="exportJSON()">导出完整备份</button>
+        <button class="btn-ghost" onclick="exportAttendanceCSV()">导出考勤 CSV</button>
+      </div>
+      <p class="data-footnote">提示：这是一版前端原型。真实飞书同步需要你授权飞书应用，并提供目标多维表格地址或 Token。</p>
+    </section>
   </div>
 
   <!-- ========== 通用模态框（编辑表单） ========== -->
