@@ -4,6 +4,15 @@
 
 基于 Ardot 设计稿（Apple HIG 风格设计系统，主色 `#0066CC`）构建的可交互 PWA 原型。
 
+## 🌐 在线访问
+
+| 通道 | 地址 | 说明 |
+|---|---|---|
+| **GitHub Pages（长期有效）** | https://walkmanmax.github.io/one-person-workbench/ | 主推送入口，push 到 main 自动重新部署 |
+| EdgeOne Makers（预览） | 部署时生成的带 `eo_token` 参数链接 | 预览链接 3 小时时效，过期需重新部署 |
+
+手机使用：浏览器打开链接 → 分享 → 添加到主屏幕，即可全屏独立运行。
+
 ## ✨ 特性
 
 - 📱 移动端优先，底部标签栏导航，页面切换带方向感过渡动画
