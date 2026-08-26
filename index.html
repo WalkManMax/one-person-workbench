@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="工作台">
+  <meta name="theme-color" content="#F5F5F7">
+  <title>一人公司工作台</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="icons/icon-192.png">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div id="app">
+
+    <!-- ========== 屏1：考勤登记 ========== -->
+    <section class="screen active" id="screen-attendance">
+      <header class="page-header">
+        <h1>考勤登记</h1>
+        <p class="subtitle">2026年8月 · 每日记录与小结</p>
+      </header>
+      <div class="content">
+
+        <div class="stat-grid">
+          <div class="stat-card" onclick="tap(this)">
+            <span class="stat-value" style="color:#0066CC">18天</span>
+            <span class="stat-label">本月在岗</span>
+          </div>
+          <div class="stat-card" onclick="tap(this)">
+            <span class="stat-value" style="color:#AF52DE">2天</span>
+            <span class="stat-label">本月休假</span>
+          </div>
+          <div class="stat-card" onclick="tap(this)">
+            <span class="stat-value" style="color:#FF9500">1天</span>
+            <span class="stat-label">本月出差</span>
+          </div>
+          <div class="stat-card" onclick="tap(this)">
+            <span class="stat-value" style="color:#5856D6">2天</span>
+            <span class="stat-label">本月值班</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3 class="card-title">今日状态</h3>
+          <div class="pill-row">
+            <button class="pill selected" onclick="selectPill(this)">在岗</button>
+            <button class="pill" onclick="selectPill(this)">出海</button>
+            <button class="pill" onclick="selectPill(this)">出差</button>
+            <button class="pill" onclick="selectPill(this)">休假</button>
+            <button class="pill" onclick="selectPill(this)">值班</button>
+          </div>
+        </div>
+
+        <div class="card record-card" onclick="tap(this)">
+          <div class="record-row">
+            <span class="record-date">8月25日 周二</span>
+            <span class="tag" style="background:#E8F5E9;color:#34A853">在岗</span>
+          </div>
+          <p class="record-note">完成移动端适配设计，同步整理考勤导出字段</p>
+        </div>
+
+        <div class="card record-card" onclick="tap(this)">
+          <div class="record-row">
+            <span class="record-date">8月24日 周一</span>
+            <span class="tag" style="background:#FFF4E5;color:#FF9500">出差</span>
+          </div>
+          <p class="record-note">外出对接供应链客户，晚上补充行业资讯整理</p>
+        </div>
+
+        <div class="card record-card" onclick="tap(this)">
+          <div class="record-row">
+            <span class="record-date">8月23日 周日</span>
+            <span class="tag" style="background:#F3E8FD;color:#AF52DE">公休</span>
+          </div>
+          <p class="record-note">休息日 · 整理下周工作计划</p>
+        </div>
+
+        <div class="card record-card" onclick="tap(this)">
+          <div class="record-row">
+            <span class="record-date">8月22日 周六</span>
+            <span class="tag" style="background:#E8F5E9;color:#34A853">在岗</span>
+          </div>
+          <p class="record-note">完成资讯模块筛选交互稿，晚上力量训练45分钟</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========== 屏2：AI资讯 ========== -->
+    <section class="screen" id="screen-news">
+      <header class="page-header">
+        <h1>AI资讯</h1>
+        <p class="subtitle">今日精选 · 关键信息结构化呈现</p>
+      </header>
+      <div class="content">
+
+        <div class="pill-row filter-row">
+          <button class="pill selected" onclick="selectPill(this)">全部</button>
+          <button class="pill" onclick="selectPill(this)">大模型</button>
+          <button class="pill" onclick="selectPill(this)">应用落地</button>
+          <button class="pill" onclick="selectPill(this)">开源</button>
+        </div>
+
+        <div class="card news-card" onclick="tap(this)">
+          <div class="news-meta">
+            <span class="tag" style="background:#E5F0FA;color:#0066CC">大模型</span>
+            <span class="news-time">2小时前</span>
+          </div>
+          <h3 class="news-title">GPT-5 正式发布，多模态推理能力大幅提升</h3>
+          <p class="news-desc">OpenAI 发布 GPT-5，支持原生图像理解、视频时序推理与工具调用，在 MMLU 基准测试中达到 92.3%。</p>
+          <span class="news-source">来源：AI前线</span>
+        </div>
+
+        <div class="card news-card" onclick="tap(this)">
+          <div class="news-meta">
+            <span class="tag" style="background:#E8F5E9;color:#34A853">开源</span>
+            <span class="news-time">5小时前</span>
+          </div>
+          <h3 class="news-title">Llama 4 登顶开源大模型榜单</h3>
+          <p class="news-desc">Meta 发布 Llama 4 系列，含 405B 参数旗舰版，在 HellaSwag 与 GSM8K 基准上超越 GPT-4o。</p>
+          <span class="news-source">来源：开源中国</span>
+        </div>
+
+        <div class="card news-card" onclick="tap(this)">
+          <div class="news-meta">
+            <span class="tag" style="background:#FFF4E5;color:#FF9500">应用落地</span>
+            <span class="news-time">8小时前</span>
+          </div>
+          <h3 class="news-title">AI Agent 企业级应用落地率达 67%</h3>
+          <p class="news-desc">最新调研显示，500 强企业中 67% 已部署 AI Agent，客服与研发为主要落地场景。</p>
+          <span class="news-source">来源：量子位</span>
+        </div>
+
+        <div class="card">
+          <h3 class="card-title">今日要点</h3>
+          <div class="key-point"><span class="dot" style="background:#0066CC"></span>GPT-5 发布引领多模态能力新高度</div>
+          <div class="key-point"><span class="dot" style="background:#34A853"></span>开源阵营 Llama 4 追赶闭源差距</div>
+          <div class="key-point"><span class="dot" style="background:#FF9500"></span>AI Agent 企业落地率突破 67%</div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========== 屏3：抖音热榜 ========== -->
+    <section class="screen" id="screen-hotlist">
+      <header class="page-header">
+        <h1>抖音热榜</h1>
+        <p class="subtitle">实时榜单 · 自动生成选题建议</p>
+      </header>
+      <div class="content">
+
+        <div class="card list-card">
+          <div class="list-header">
+            <h3 class="card-title">实时热榜 TOP 5</h3>
+            <span class="list-updated">更新于 12:30</span>
+          </div>
+
+          <div class="rank-row" onclick="tap(this)">
+            <span class="rank-num" style="color:#FF3B30">1</span>
+            <span class="rank-title">AI生成的短视频登上热搜第一</span>
+            <span class="rank-heat" style="color:#FF3B30">982万</span>
+          </div>
+          <div class="rank-row" onclick="tap(this)">
+            <span class="rank-num" style="color:#FF9500">2</span>
+            <span class="rank-title">国产AI助手用户量突破1亿</span>
+            <span class="rank-heat" style="color:#FF9500">756万</span>
+          </div>
+          <div class="rank-row" onclick="tap(this)">
+            <span class="rank-num" style="color:#FFCC00">3</span>
+            <span class="rank-title">AI+非遗手工艺短视频走红</span>
+            <span class="rank-heat" style="color:#FFCC00">634万</span>
+          </div>
+          <div class="rank-row" onclick="tap(this)">
+            <span class="rank-num" style="color:#86868B">4</span>
+            <span class="rank-title">AI面试官引发求职者热议</span>
+            <span class="rank-heat" style="color:#86868B">421万</span>
+          </div>
+          <div class="rank-row" onclick="tap(this)">
+            <span class="rank-num" style="color:#86868B">5</span>
+            <span class="rank-title">大模型生成内容版权归属讨论</span>
+            <span class="rank-heat" style="color:#86868B">298万</span>
+          </div>
+        </div>
+
+        <div class="card topic-card" onclick="tap(this)">
+          <div class="news-meta">
+            <span class="topic-label">选题方向</span>
+            <span class="tag" style="background:#FFF0F0;color:#FF3B30">高热度</span>
+          </div>
+          <h3 class="news-title">AI 生成短视频如何改变创作生态</h3>
+          <p class="news-desc">角度：工具对比 + 创作者访谈 + 效率提升数据</p>
+        </div>
+
+        <div class="card topic-card" onclick="tap(this)">
+          <div class="news-meta">
+            <span class="topic-label">选题方向</span>
+            <span class="tag" style="background:#FFF4E5;color:#FF9500">上升趋势</span>
+          </div>
+          <h3 class="news-title">AI + 非遗：技术与传统的碰撞</h3>
+          <p class="news-desc">角度：手艺人故事 + AI 辅助流程演示</p>
+        </div>
+
+        <div class="card topic-card" onclick="tap(this)">
+          <div class="news-meta">
+            <span class="topic-label">选题方向</span>
+            <span class="tag" style="background:#E8F5E9;color:#34A853">社会议题</span>
+          </div>
+          <h3 class="news-title">AI 面试官：公平还是筛选陷阱</h3>
+          <p class="news-desc">角度：求职者体验 + HR 视角 + 技术局限分析</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========== 屏4：健身打卡 ========== -->
+    <section class="screen" id="screen-fitness">
+      <header class="page-header">
+        <h1>健身打卡</h1>
+        <p class="subtitle">今日运动与饮水 · 汇总自动推送飞书</p>
+      </header>
+      <div class="content">
+
+        <div class="stat-grid">
+          <div class="stat-card" onclick="tap(this)">
+            <span class="stat-value" style="color:#0066CC">6/8杯</span>
+            <span class="stat-label">今日饮水</span>
+          </div>
+          <div class="stat-card" onclick="tap(this)">
+            <span class="stat-value" style="color:#FF9500">320千卡</span>
+            <span class="stat-label">今日消耗</span>
+          </div>
+          <div class="stat-card" onclick="tap(this)">
+            <span class="stat-value" style="color:#34A853">5次</span>
+            <span class="stat-label">本周打卡</span>
+          </div>
+          <div class="stat-card" onclick="tap(this)">
+            <span class="stat-value" style="color:#AF52DE">12天</span>
+            <span class="stat-label">连续打卡</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="list-header">
+            <h3 class="card-title">喝水提醒</h3>
+            <span class="list-updated">每2小时 · 已喝6/8杯</span>
+          </div>
+          <div class="progress-track"><div class="progress-fill" style="width:75%"></div></div>
+        </div>
+
+        <div class="card">
+          <div class="list-header">
+            <h3 class="card-title">本周打卡</h3>
+            <span class="list-updated">已完成 5/7</span>
+          </div>
+          <div class="week-row">
+            <div class="week-dot done">一</div>
+            <div class="week-dot done">二</div>
+            <div class="week-dot done">三</div>
+            <div class="week-dot done">四</div>
+            <div class="week-dot today">五</div>
+            <div class="week-dot rest">六</div>
+            <div class="week-dot rest">日</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="list-header">
+            <h3 class="card-title">今日训练 · 胸肩</h3>
+            <span class="list-updated">45分钟 · 320千卡</span>
+          </div>
+          <div class="exercise-row"><span>哑铃卧推</span><span class="exercise-sets">4组 × 12次</span></div>
+          <div class="exercise-row"><span>上斜哑铃推举</span><span class="exercise-sets">3组 × 10次</span></div>
+          <div class="exercise-row"><span>哑铃侧平举</span><span class="exercise-sets">3组 × 15次</span></div>
+        </div>
+
+        <div class="card toggle-card">
+          <div class="toggle-info">
+            <h3 class="card-title">飞书每日汇总</h3>
+            <p class="toggle-desc">每天 21:00 推送打卡与饮水记录</p>
+          </div>
+          <div class="switch on" onclick="toggleSwitch(this)"><div class="knob"></div></div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========== 底部标签栏 ========== -->
+    <nav class="tab-bar">
+      <button class="tab-item active" data-target="screen-attendance" onclick="switchTab('screen-attendance', this)">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M7 4C10.3 4 13.6 4 17 4C18.7 4 20 5.3 20 7C20 10.3 20 13.6 20 17C20 18.7 18.7 20 17 20C13.6 20 10.3 20 7 20C5.3 20 4 18.7 4 17C4 13.6 4 10.3 4 7C4 5.3 5.3 4 7 4Z M4 10C9.3 10 14.6 10 20 10 M8 3C8 4.3 8 5.6 8 7 M16 3C16 4.3 16 5.6 16 7" stroke="currentColor" stroke-width="2"/></svg>
+        <span>考勤</span>
+      </button>
+      <button class="tab-item" data-target="screen-news" onclick="switchTab('screen-news', this)">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M5 4C9.6 4 14.3 4 19 4C20.1 4 21 4.9 21 6C21 10 21 14 21 18C21 19.1 20.1 20 19 20C14.3 20 9.6 20 5 20C3.9 20 3 19.1 3 18C3 14 3 10 3 6C3 4.9 3.9 4 5 4Z M7 9C10.3 9 13.6 9 17 9 M7 13C10.3 13 13.6 13 17 13 M7 17C9 17 11 17 13 17" stroke="currentColor" stroke-width="2"/></svg>
+        <span>AI资讯</span>
+      </button>
+      <button class="tab-item" data-target="screen-hotlist" onclick="switchTab('screen-hotlist', this)">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M12 3C12 3 6 8 6 13C6 16.3 8.7 19 12 19C15.3 19 18 16.3 18 13C18 8 12 3 12 3Z M10 15C10 16.1 10.9 17 12 17C13.1 17 14 16.1 14 15C14 13.5 12 12 12 12C12 12 10 13.5 10 15Z" stroke="currentColor" stroke-width="2"/></svg>
+        <span>热榜</span>
+      </button>
+      <button class="tab-item" data-target="screen-fitness" onclick="switchTab('screen-fitness', this)">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M7 9C7 11 7 13 7 15 M17 9C17 11 17 13 17 15 M4 10C4 11.3 4 12.6 4 14 M20 10C20 11.3 20 12.6 20 14 M7 12C10.3 12 13.6 12 17 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        <span>健身</span>
+      </button>
+    </nav>
+
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
